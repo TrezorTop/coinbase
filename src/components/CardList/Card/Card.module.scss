@@ -1,5 +1,39 @@
 .Card {
+  display: flex;
+  gap: 16px;
   color: black;
   background-color: white;
   padding: 16px;
+
+  .CoinImage {
+    display: flex;
+    align-content: center;
+    width: 5rem;
+    height: fit-content;
+
+    img {
+      width: 100%;
+    }
+  }
+
+  .CoinInfo {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    width: 100%;
+
+    .InfoRow {
+      display: flex;
+      justify-content: space-between;
+
+      width: 100%;
+      gap: 8px;
+
+      .DotLeader {
+        border-bottom: 1px dotted black;
+        flex-grow: 1;
+      }
+    }
+  }
 }

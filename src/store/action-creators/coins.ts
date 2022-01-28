@@ -26,23 +26,11 @@ export const fetchCoins = () => {
   };
 };
 
-export const updateCoin = (
-  coinIdToUpdate: string,
-  ...args: Partial<ICoin>[]
-) => {
+export const updateCoin = (coinIdToUpdate: string, args: Partial<ICoin>) => {
   return (dispatch: Dispatch<CoinsAction>) => {
     dispatch({
       type: CoinsActionsEnum.UPDATE_COIN,
       payload: { id: coinIdToUpdate, params: args },
-    });
-  };
-};
-
-export const getCoinsFiltered = (...args: Partial<ICoin>[]) => {
-  return (dispatch: Dispatch<CoinsAction>) => {
-    dispatch({
-      type: CoinsActionsEnum.GET_COINS_FILTERED,
-      payload: args,
     });
   };
 };

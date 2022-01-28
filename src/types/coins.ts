@@ -3,7 +3,6 @@ export enum CoinsActionsEnum {
   FETCH_COINS_SUCCESS = "FETCH_COINS_SUCCESS",
   FETCH_COINS_ERROR = "FETCH_COINS_ERROR",
   UPDATE_COIN = "CHANGE_COIN",
-  GET_COINS_FILTERED = "GET_COINS_FILTERED",
 }
 
 export interface IFetchCoinsAction {
@@ -22,12 +21,7 @@ export interface IFetchCoinsErrorAction {
 
 export interface IUpdateCoinAction {
   type: CoinsActionsEnum.UPDATE_COIN;
-  payload: { id: string; params: Partial<ICoin>[] };
-}
-
-export interface IGetCoinsFiltered {
-  type: CoinsActionsEnum.GET_COINS_FILTERED;
-  payload: Partial<ICoin>[];
+  payload: { id: string; params: Partial<ICoin> };
 }
 
 export interface ICoin {
@@ -43,7 +37,6 @@ export interface ICoin {
 
 export interface ICoinsState {
   coins: ICoin[];
-  filteredCoins: ICoin[];
   isFetching: boolean;
   errorMessage: null | string;
 }
@@ -52,5 +45,4 @@ export type CoinsAction =
   | IFetchCoinsAction
   | IFetchCoinsSuccessAction
   | IFetchCoinsErrorAction
-  | IUpdateCoinAction
-  | IGetCoinsFiltered;
+  | IUpdateCoinAction;
