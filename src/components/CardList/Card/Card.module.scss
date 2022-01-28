@@ -1,9 +1,19 @@
 .Card {
   display: flex;
+  flex-direction: column;
+
   gap: 16px;
+
   color: black;
   background-color: white;
   padding: 16px;
+
+  overflow: auto;
+
+  .Container {
+    display: flex;
+    gap: 16px;
+  }
 
   .CoinImage {
     display: flex;
@@ -29,11 +39,12 @@
 
       width: 100%;
       gap: 8px;
-
-      .DotLeader {
-        border-bottom: 1px dotted black;
-        flex-grow: 1;
-      }
     }
+  }
+
+  .CardFooter {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
   }
 }
