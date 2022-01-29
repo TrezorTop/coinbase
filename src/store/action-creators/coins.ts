@@ -1,19 +1,24 @@
-import { CoinsAction, CoinsActionsEnum, ICoin } from "../../types/coins";
+import { CoinsAction, CoinsActionsEnum, ICoin } from "types/coins";
 import { Dispatch } from "redux";
 import axios from "axios";
+import { BASE_URL } from "util/config";
+import { store } from "../index";
 
 export const fetchCoins = () => {
   return async (dispatch: Dispatch<CoinsAction>) => {
     try {
-      dispatch({ type: CoinsActionsEnum.FETCH_COINS });
-      const response = await axios.get<ICoin[]>(
-        "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&per_page=15"
-      );
-
-      dispatch({
-        type: CoinsActionsEnum.FETCH_COINS_SUCCESS,
-        payload: response.data.map((item) => ({ ...item, liked: false })),
-      });
+      if (!store.getState().coinsState.isFetching) {
+        dispatch({ type: CoinsActionsEnum.FETCH_COINS });
+        const response = await axios.get<ICoin[]>(
+          `${BASE_URL}/coins/markets?vs_currency=usd&per_page=4&page=${
+            store.getState().coinsState.page
+          }}`
+        );
+        dispatch({
+          type: CoinsActionsEnum.FETCH_COINS_SUCCESS,
+          payload: response.data.map((item) => ({ ...item, liked: false })),
+        });
+      }
     } catch (error) {
       dispatch({
         type: CoinsActionsEnum.FETCH_COINS_ERROR,

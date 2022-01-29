@@ -1,8 +1,16 @@
 import { useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
-import * as CoinActionCreators from "../store/action-creators/coins";
+import * as CoinActionCreators from "store/action-creators/coins";
+import { useEffect } from "react";
 
 export const useActions = () => {
   const dispatch = useDispatch();
-  return bindActionCreators(CoinActionCreators, dispatch);
+  const creators = bindActionCreators(CoinActionCreators, dispatch);
+  const { fetchCoins } = creators;
+
+  useEffect(() => {
+    fetchCoins();
+  }, []);
+
+  return creators;
 };

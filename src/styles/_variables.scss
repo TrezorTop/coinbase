@@ -1,0 +1,39 @@
+:root {
+  // Colors
+  --white: #ffffff;
+  --grey-light: #b0b0b0;
+  --grey: #858585;
+  --red: #eb5757;
+  --black: #1e293c;
+
+  // Icons
+  --icon-primary: var(--grey);
+  --icon-red: var(--red);
+
+  // Text
+  --text-primary: var(--black);
+  --text-secondary: var(--grey);
+  --text-white: var(--white);
+
+  // Shadows
+  --box-shadow: 0px 0px 20px 3px rgba(89, 107, 242, 0.1);
+
+  // Radius
+  --radius: 10px;
+
+  // Padding
+  --padding-l: 16px;
+  --padding-m: 8px;
+
+  // Gap
+  --gap-l: 16px;
+  --gap-m: 8px;
+
+  // Scrollbars
+  --scrollbar-thumb-color: var(--grey-light);
+  --scrollbar-thumb-hover-color: var(--grey);
+  --scrollbar-thumb-active-color: var(--grey);
+
+  // Transitions
+  --transition-ease-short: 150ms ease;
+}

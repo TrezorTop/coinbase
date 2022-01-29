@@ -1,8 +1,29 @@
 .Cards {
   display: flex;
-  flex-direction: column;
-  gap: 16px;
+  flex-wrap: wrap;
+
+  gap: var(--gap-l);
   margin: 0 auto;
   width: 50%;
   max-width: 400px;
+  height: 100%;
+
+  overflow-y: scroll;
+
+  color: var(--text-secondary);
+
+  .Settings {
+    padding: var(--padding-l);
+    background-color: var(--white);
+
+    width: 100%;
+
+    .Icon {
+      color: var(--icon-primary);
+    }
+
+    .Positive {
+      color: var(--icon-red);
+    }
+  }
 }

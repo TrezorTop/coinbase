@@ -9,9 +9,6 @@ export const filterArrayObjectsByParams = <T>(
         (coin) => coin[item as keyof T] === filterParams[item as keyof T]
       )
     );
-    // result = items.filter(
-    //   (coin) => coin[item as keyof T] === filterParams[item as keyof T]
-    // );
   });
   return result;
 };

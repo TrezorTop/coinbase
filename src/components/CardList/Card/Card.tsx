@@ -1,7 +1,8 @@
 import React, { FC } from "react";
 import classes from "./Card.module.scss";
-import { ICoin } from "../../../types/coins";
-import DotLeader from "../../UI/DotLeader/DotLeader";
+import { ICoin } from "types/coins";
+import DotLeader from "components/UI/DotLeader/DotLeader";
+import { HeartFilled } from "@ant-design/icons";
 
 interface ICardProps extends ICoin {
   likeClicked: (id: string, liked: boolean) => void;
@@ -43,17 +44,23 @@ const Card: FC<ICardProps> = ({
         </div>
       </div>
       <div className={classes.CardFooter}>
-        <div>
-          <span>24h highest:</span>
-          <span>{high_24h}</span>
+        <div className={classes.InfoRow}>
+          <div>
+            <span>24h highest:</span>
+            <span>{high_24h}</span>
+          </div>
+          <div>
+            <span>24h lowest:</span>
+            <span>{low_24h}</span>
+          </div>
         </div>
-        <div>
-          <span>24h lowest:</span>
-          <span>{low_24h}</span>
-        </div>
-        <button onClick={() => likeClicked(id, !liked)}>
-          liked: {liked.toString()}
-        </button>
+        <HeartFilled
+          onClick={() => likeClicked(id, !liked)}
+          className={[
+            classes.LikeButton,
+            liked ? classes.LikeButtonPositive : classes.LikeButtonNegative,
+          ].join(" ")}
+        />
       </div>
     </div>
   );

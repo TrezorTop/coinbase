@@ -39,6 +39,7 @@ export interface ICoinsState {
   coins: ICoin[];
   isFetching: boolean;
   errorMessage: null | string;
+  page: number;
 }
 
 export type CoinsAction =

@@ -1,9 +1,10 @@
-import { CoinsAction, CoinsActionsEnum, ICoinsState } from "../../types/coins";
+import { CoinsAction, CoinsActionsEnum, ICoinsState } from "types/coins";
 
 const initialState: ICoinsState = {
   coins: [],
   isFetching: false,
   errorMessage: null,
+  page: 1,
 };
 
 export const coinsReducer = (
@@ -16,18 +17,21 @@ export const coinsReducer = (
         isFetching: true,
         errorMessage: null,
         coins: state.coins,
+        page: state.page,
       };
     case CoinsActionsEnum.FETCH_COINS_SUCCESS:
       return {
         isFetching: false,
         errorMessage: null,
-        coins: action.payload,
+        coins: [...state.coins, ...action.payload],
+        page: state.page + 1,
       };
     case CoinsActionsEnum.FETCH_COINS_ERROR:
       return {
         isFetching: false,
         errorMessage: action.payload,
         coins: state.coins,
+        page: state.page,
       };
     case CoinsActionsEnum.UPDATE_COIN:
       return {
@@ -38,6 +42,7 @@ export const coinsReducer = (
             ? { ...item, ...action.payload.params }
             : item
         ),
+        page: state.page,
       };
     default:
       return state;

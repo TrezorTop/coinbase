@@ -1,10 +1,10 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { FC, useCallback, useRef, useState } from "react";
 import classes from "./Cards.module.scss";
-import { useTypedSelector } from "../../hooks/useTypedSelector";
 import Card from "./Card/Card";
-import { fetchCoins } from "../../store/action-creators/coins";
-import { useActions } from "../../hooks/useActions";
-import ToggleButton from "../UI/ToggleButton/ToggleButton";
+import { fetchCoins } from "store/action-creators/coins";
+import { useActions } from "hooks/useActions";
+import { FilterFilled } from "@ant-design/icons";
+import { useTypedSelector } from "hooks/useTypedSelector";
 import { filterArrayObjectsByParams } from "../../util/filter-array-objects-by-params";
 
 interface ICardsState {
@@ -24,31 +24,46 @@ const Cards: FC = () => {
 
   const { fetchCoins, updateCoin } = useActions();
 
-  useEffect(() => {
-    fetchCoins();
-  }, []);
+  const listElement = useRef<HTMLDivElement>(null);
 
   const likeButtonHandler = (id: string, liked: boolean) => {
     updateCoin(id, { liked });
   };
 
   const filterButtonHandler = () => {
-    setState({
-      isFiltered: !state.isFiltered,
-      filteredCoinsId: filterArrayObjectsByParams(coins, { liked: true }).map(
-        (item) => item.id
-      ),
+    setState(() => {
+      return {
+        isFiltered: !state.isFiltered,
+        filteredCoinsId: filterArrayObjectsByParams(coins, { liked: true }).map(
+          (item) => item.id
+        ),
+      };
     });
   };
 
+  const memoizedScroll = useCallback(() => {
+    const { current } = listElement;
+    if (!current || state.isFiltered) return;
+    const { scrollTop, scrollHeight, offsetHeight } = current;
+
+    const maxScrollTop = scrollHeight - offsetHeight;
+    if (scrollTop > maxScrollTop - 100) fetchCoins();
+  }, [state]);
+
   return (
-    <div className={classes.Cards}>
-      <ToggleButton
-        onClick={filterButtonHandler}
-        status={state.isFiltered}
-        primaryTitle={"OFF"}
-        secondaryTitle={"ON"}
-      />
+    <div className={classes.Cards} ref={listElement} onWheel={memoizedScroll}>
+      <div className={classes.Settings}>
+        <div>
+          <FilterFilled
+            onClick={filterButtonHandler}
+            className={[
+              classes.Icon,
+              state.isFiltered ? classes.Positive : null,
+            ].join(" ")}
+          />
+          - Show only liked
+        </div>
+      </div>
 
       {isFetching && <div>Loading...</div>}
 

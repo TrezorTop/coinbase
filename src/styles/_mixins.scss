@@ -1,0 +1,29 @@
+@mixin customize-scroll() {
+  // exclude non-supporting browsers
+  @media all and (-webkit-min-device-pixel-ratio: 0) and (min-resolution: 0.001dpcm) {
+    &::-webkit-scrollbar,
+    &::-webkit-scrollbar-thumb {
+      width: 16px;
+      height: 16px;
+      border-radius: 100px;
+      background-clip: padding-box;
+      border: 6px solid transparent;
+    }
+
+    &::-webkit-scrollbar {
+      background-color: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: var(--scrollbar-thumb-color);
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+      background-color: var(--scrollbar-thumb-hover-color);
+    }
+
+    &::-webkit-scrollbar-thumb:active {
+      background-color: var(--scrollbar-thumb-active-color);
+    }
+  }
+}
