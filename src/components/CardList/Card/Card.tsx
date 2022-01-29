@@ -2,10 +2,11 @@ import React, { FC } from "react";
 import classes from "./Card.module.scss";
 import { ICoin } from "types/coins";
 import DotLeader from "components/UI/DotLeader/DotLeader";
-import { HeartFilled } from "@ant-design/icons";
+import { DeleteFilled, HeartFilled } from "@ant-design/icons";
 
 interface ICardProps extends ICoin {
   likeClicked: (id: string, liked: boolean) => void;
+  deleteClicked: (id: string) => void;
 }
 
 const Card: FC<ICardProps> = ({
@@ -16,8 +17,9 @@ const Card: FC<ICardProps> = ({
   current_price,
   high_24h,
   low_24h,
-  likeClicked,
   liked,
+  likeClicked,
+  deleteClicked,
 }) => {
   return (
     <div className={classes.Card}>
@@ -57,9 +59,13 @@ const Card: FC<ICardProps> = ({
         <HeartFilled
           onClick={() => likeClicked(id, !liked)}
           className={[
-            classes.LikeButton,
-            liked ? classes.LikeButtonPositive : classes.LikeButtonNegative,
+            classes.IconButton,
+            liked ? classes.LikeButtonPositive : null,
           ].join(" ")}
+        />
+        <DeleteFilled
+          onClick={() => deleteClicked(id)}
+          className={[classes.IconButton].join(" ")}
         />
       </div>
     </div>

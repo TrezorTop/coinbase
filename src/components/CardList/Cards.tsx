@@ -22,12 +22,16 @@ const Cards: FC = () => {
     (state) => state.coinsState
   );
 
-  const { fetchCoins, updateCoin } = useActions();
+  const { fetchCoins, updateCoin, deleteCoin } = useActions();
 
   const listElement = useRef<HTMLDivElement>(null);
 
   const likeButtonHandler = (id: string, liked: boolean) => {
     updateCoin(id, { liked });
+  };
+
+  const deleteButtonHandler = (id: string) => {
+    deleteCoin(id);
   };
 
   const filterButtonHandler = () => {
@@ -82,6 +86,7 @@ const Cards: FC = () => {
               low_24h={coin.low_24h}
               liked={coin.liked}
               likeClicked={likeButtonHandler}
+              deleteClicked={deleteButtonHandler}
             />
           ))
         : coins
@@ -98,6 +103,7 @@ const Cards: FC = () => {
                 low_24h={coin.low_24h}
                 liked={coin.liked}
                 likeClicked={likeButtonHandler}
+                deleteClicked={deleteButtonHandler}
               />
             ))}
     </div>

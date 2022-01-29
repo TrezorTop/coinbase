@@ -44,6 +44,13 @@ export const coinsReducer = (
         ),
         page: state.page,
       };
+    case CoinsActionsEnum.DELETE_COIN:
+      return {
+        isFetching: state.isFetching,
+        errorMessage: state.errorMessage,
+        coins: state.coins.filter((item) => item.id !== action.payload),
+        page: state.page,
+      };
     default:
       return state;
   }

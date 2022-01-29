@@ -51,15 +51,12 @@
   }
 }
 
-.LikeButton {
+.IconButton {
   cursor: pointer;
   transition: var(--transition-ease-short);
+  color: var(--icon-primary);
 }
 
 .LikeButtonPositive {
   color: var(--icon-red);
-}
-
-.LikeButtonNegative {
-  color: var(--icon-primary);
 }

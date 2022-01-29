@@ -39,3 +39,12 @@ export const updateCoin = (coinIdToUpdate: string, args: Partial<ICoin>) => {
     });
   };
 };
+
+export const deleteCoin = (coinIdToDelete: string) => {
+  return (dispatch: Dispatch<CoinsAction>) => {
+    dispatch({
+      type: CoinsActionsEnum.DELETE_COIN,
+      payload: coinIdToDelete,
+    });
+  };
+};

@@ -3,6 +3,7 @@ export enum CoinsActionsEnum {
   FETCH_COINS_SUCCESS = "FETCH_COINS_SUCCESS",
   FETCH_COINS_ERROR = "FETCH_COINS_ERROR",
   UPDATE_COIN = "CHANGE_COIN",
+  DELETE_COIN = "DELETE_COIN",
 }
 
 export interface IFetchCoinsAction {
@@ -22,6 +23,11 @@ export interface IFetchCoinsErrorAction {
 export interface IUpdateCoinAction {
   type: CoinsActionsEnum.UPDATE_COIN;
   payload: { id: string; params: Partial<ICoin> };
+}
+
+export interface IDeleteCoinAction {
+  type: CoinsActionsEnum.DELETE_COIN;
+  payload: string;
 }
 
 export interface ICoin {
@@ -46,4 +52,5 @@ export type CoinsAction =
   | IFetchCoinsAction
   | IFetchCoinsSuccessAction
   | IFetchCoinsErrorAction
-  | IUpdateCoinAction;
+  | IUpdateCoinAction
+  | IDeleteCoinAction;
